@@ -6,20 +6,20 @@ import TodoList from './components/TodoList';
 import { getTodos, addTodo, updateTodo, deleteTodo } from './api/todoApi';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
-import { AuthContext, AuthProvider } from './context/AuthContext';
+import AuthProvider, { AuthContext } from './context/AuthContext';
 
 const App = () => {
     return (
-        <AuthProvider>
-            <Router>
+        <Router> {/* Ensure Router wraps the AuthProvider */}
+            <AuthProvider>
                 <Routes>
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/todos" element={<ProtectedTodoApp />} />
                     <Route path="*" element={<Navigate to="/login" replace />} />
                 </Routes>
-            </Router>
-        </AuthProvider>
+            </AuthProvider>
+        </Router>
     );
 };
 

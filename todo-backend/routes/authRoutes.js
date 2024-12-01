@@ -54,7 +54,7 @@ router.post(
     }
 );
 
-// Login
+// Login Route
 router.post(
     '/login',
     [
@@ -70,20 +70,35 @@ router.post(
         const { email, password } = req.body;
 
         try {
+            // Find user by email
             const user = await User.findOne({ email });
             if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
 
+            // Check if the password matches
             const isMatch = await user.matchPassword(password);
             if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
+            // Generate JWT token
             const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
-            res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
+
+            // Initialize userData after checking if the user and password match
+            const userData = {
+                id: user._id.toString(),
+                name: user.firstName + ' ' + user.lastName,
+                email: user.email,
+            };
+
+            console.log('Login Response:', { token, user: userData });
+
+            // Return the token and the user object in the response
+            return res.json({ token, user: userData });
         } catch (err) {
-            console.error(err.message);
+            console.error('Login error:', err);
             res.status(500).send('Server error');
         }
     }
 );
+
 
 // Forgot Password
 router.post('/forgot-password', async (req, res) => {

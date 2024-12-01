@@ -19,11 +19,16 @@ export const signupUser = async (userData) => {
 export const loginUser = async (userData) => {
     try {
         const response = await axios.post(`${API_URL}/login`, userData);
-        return response.data;
+        console.log("Complete API Response:", response); // Log the entire response object
+        return response.data;  // Make sure this line is executed
     } catch (error) {
+        console.error("Error in API request:", error);
         throw error.response ? error.response.data : error.message;
     }
 };
+
+
+
 
 // Forgot Password
 export const forgotPassword = async (email) => {

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { loginUser } from '../api/authAPI';
-import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,13 +13,21 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await loginUser({ email, password });
-            login(data.user, data.token);
-            navigate('/todos');
+            const data = await loginUser({ email, password });
+            console.log("Response data:", data);  // Log the returned data
+    
+            // Check if user and token are present in the response
+            if (data && data.user && data.token) {
+                login(data.user, data.token);
+                navigate('/todos');
+            } else {
+                setError('Login failed: User data not returned.');
+            }
         } catch (err) {
-            setError(err.response?.data?.msg || 'Invalid credentials');
+            setError(err?.response?.data?.msg || err?.message || 'Something went wrong');
         }
     };
+       
 
     return (
         <div>
