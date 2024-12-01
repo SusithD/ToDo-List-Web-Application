@@ -12,6 +12,7 @@ const TodoDashboard = () => {
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(true);
 
+    // Fetch todos from the API
     useEffect(() => {
         const fetchTodos = async () => {
             const data = await getTodos();
@@ -20,6 +21,49 @@ const TodoDashboard = () => {
         };
         fetchTodos();
     }, []);
+
+    // Check for upcoming tasks (within 24 hours) and trigger notifications
+    useEffect(() => {
+        // Request notification permission if not granted yet
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission();
+        }
+
+        // Function to check for tasks with upcoming due dates
+        const checkForUpcomingTasks = () => {
+            const currentDate = new Date();
+            const upcomingTasks = todos.filter((todo) => {
+                const dueDate = new Date(todo.dueDate);
+                const timeDifference = dueDate - currentDate;
+                const oneDayInMs = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+                return timeDifference <= oneDayInMs && timeDifference > 0; // Due within the next 24 hours
+            });
+
+            if (upcomingTasks.length > 0) {
+                upcomingTasks.forEach((task) => {
+                    sendNotification(task);
+                });
+            }
+        };
+
+        // Function to send a notification
+        const sendNotification = (task) => {
+            if (Notification.permission === "granted") {
+                new Notification(`Task Due Soon: ${task.title}`, {
+                    body: `Due on ${new Date(task.dueDate).toLocaleString()}`,
+                    icon: '/path/to/icon.png', // Optional: Add an icon for the notification
+                });
+            }
+        };
+
+        // Set an interval to check for upcoming tasks every minute
+        const interval = setInterval(() => {
+            checkForUpcomingTasks();
+        }, 60000); // Check every 60 seconds
+
+        // Cleanup the interval when the component is unmounted
+        return () => clearInterval(interval);
+    }, [todos]);
 
     const handleAdd = async (todo) => {
         const newTodo = await addTodo(todo);
