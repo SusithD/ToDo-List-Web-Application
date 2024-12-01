@@ -1,23 +1,37 @@
 import React from 'react';
 
 const TodoList = ({ todos, onUpdate, onDelete }) => (
-   <ul style={{ listStyle: 'none', padding: 0 }}>
-       {todos.map((todo) => (
-           <li key={todo._id} style={{ margin: '10px 0', padding: '10px', border: '1px solid #ddd' }}>
-               <h3>{todo.title}</h3>
-               <p>{todo.description}</p>
-               <div>
-                   <button
-                       onClick={() => onUpdate(todo._id, { ...todo, status: 'completed' })}
-                       style={{ marginRight: '10px' }}
-                   >
-                       Complete
-                   </button>
-                   <button onClick={() => onDelete(todo._id)}>Delete</button>
-               </div>
-           </li>
-       ))}
-   </ul>
+    <div className="mt-4 space-y-4">
+        {todos.length > 0 ? (
+            todos.map((todo) => (
+                <div
+                    key={todo._id}
+                    className="p-4 bg-white shadow-md rounded-lg flex justify-between items-center"
+                >
+                    <div>
+                        <h3 className="text-lg font-bold">{todo.title}</h3>
+                        <p className="text-gray-600">{todo.description}</p>
+                    </div>
+                    <div className="flex space-x-2">
+                        <button
+                            onClick={() => onUpdate(todo._id, { ...todo, status: 'completed' })}
+                            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                        >
+                            Complete
+                        </button>
+                        <button
+                            onClick={() => onDelete(todo._id)}
+                            className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            ))
+        ) : (
+            <p className="text-gray-500">No tasks available.</p>
+        )}
+    </div>
 );
 
 export default TodoList;

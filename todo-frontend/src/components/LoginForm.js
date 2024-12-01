@@ -16,7 +16,7 @@ const LoginForm = () => {
             const data = await loginUser({ email, password });
             if (data && data.user && data.token) {
                 login(data.user, data.token);
-                navigate('/todos');
+                navigate('/dashboard');
             } else {
                 setError('Login failed: User data not returned.');
             }
