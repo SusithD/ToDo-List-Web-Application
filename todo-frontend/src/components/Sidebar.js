@@ -10,7 +10,7 @@ const Sidebar = ({ setFilter }) => {
     };
 
     return (
-        <div className="h-full w-64 bg-gray-900 text-white flex flex-col shadow-lg">
+        <div className="h-full w-64 bg-gray-950 text-white flex flex-col shadow-lg">
             {/* Sidebar Header */}
             <div className="p-6 text-2xl font-bold flex items-center space-x-3 border-b border-gray-700">
                 <AiOutlineDashboard className="text-blue-500 text-3xl" />

@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
 import TodoForm from '../components/TodoForm';
 import TodoList from '../components/TodoList';
+import CalendarView from '../components/CalendarView';
 import { getTodos, addTodo, updateTodo, deleteTodo } from '../api/todoApi';
 
 const TodoDashboard = () => {
@@ -49,61 +50,50 @@ const TodoDashboard = () => {
     const inProgressTasks = totalTasks - completedTasks;
 
     return (
-        <div className="flex h-screen bg-gray-100">
+        <div className="flex h-screen bg-gray-900 text-white">
             {/* Sidebar */}
             <Sidebar setFilter={setFilter} />
+            
             {/* Main Content */}
             <div className="flex-1 overflow-y-auto">
                 <Navbar />
 
                 {/* Hero Section */}
-                <section className="relative bg-blue-500 text-white py-32 px-6 lg:px-24">
-                    {/* Overlay Effect */}
-                    <div className="absolute inset-0 bg-black opacity-50"></div>
-
-                    {/* Background Image */}
+                <section className="relative bg-blue-700 text-white py-32 px-6 lg:px-24">
+                    <div className="absolute inset-0 bg-black opacity-60"></div>
                     <div
                         className="absolute inset-0 bg-cover bg-center z-0"
                         style={{
                             backgroundImage: 'url(todo-frontend/src/assests/dlxmedia-hu-l7idyRTQePY-unsplash.jpg)',
                         }}
                     ></div>
-
-                    {/* Hero Content */}
                     <div className="relative z-10 text-center text-white">
-                        {/* Main Heading */}
-                        <h1 className="text-2xl md:text-6xl font-bold mb-6 leading-tight tracking-wide">
+                        <h1 className="text-3xl md:text-6xl font-bold mb-6 leading-tight tracking-wide">
                             Welcome to Your Todo Dashboard
                         </h1>
-
-                        {/* Subheading */}
                         <p className="text-lg md:text-2xl mb-8 max-w-2xl mx-auto">
                             Stay organized, track your tasks, and get things done—Effortlessly manage your work and life.
                         </p>
-
-                        {/* Call-to-Action Button */}
                         <a
                             href="#tasks"
-                            className="inline-block px-8 py-4 bg-blue-700 text-lg font-semibold text-white rounded-lg shadow-xl hover:bg-blue-800 hover:scale-105 transform transition duration-300 ease-in-out"
+                            className="inline-block px-8 py-4 bg-blue-800 text-lg font-semibold text-white rounded-lg shadow-xl hover:bg-blue-900 hover:scale-105 transform transition duration-300 ease-in-out"
                         >
                             Start Managing Tasks
                         </a>
                     </div>
-
-                    
                 </section>
 
                 {/* Summary Section */}
-                <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="p-4 bg-white shadow-md rounded-lg text-center">
+                <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="p-4 bg-gray-800 shadow-md rounded-lg text-center">
                         <h3 className="text-lg font-semibold">Total Tasks</h3>
                         <p className="text-2xl font-bold">{totalTasks}</p>
                     </div>
-                    <div className="p-4 bg-white shadow-md rounded-lg text-center">
+                    <div className="p-4 bg-gray-800 shadow-md rounded-lg text-center">
                         <h3 className="text-lg font-semibold">Completed Tasks</h3>
                         <p className="text-2xl font-bold">{completedTasks}</p>
                     </div>
-                    <div className="p-4 bg-white shadow-md rounded-lg text-center">
+                    <div className="p-4 bg-gray-800 shadow-md rounded-lg text-center">
                         <h3 className="text-lg font-semibold">In-Progress Tasks</h3>
                         <p className="text-2xl font-bold">{inProgressTasks}</p>
                     </div>
@@ -129,6 +119,9 @@ const TodoDashboard = () => {
                         />
                     )}
                 </div>
+
+                {/* Calendar Section */}
+                <CalendarView todos={todos} />
             </div>
         </div>
     );
