@@ -57,13 +57,40 @@ const TodoDashboard = () => {
                 <Navbar />
 
                 {/* Hero Section */}
-                <section className="relative bg-blue-500 text-white py-20">
-                    <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(https://unsplash.com/photos/a-laptop-and-a-charger-l7idyRTQePY)' }}></div>
-                    <div className="relative z-10 text-center">
-                        <h1 className="text-4xl font-bold mb-4">Welcome to Your Todo Dashboard</h1>
-                        <p className="text-xl mb-6">Stay organized, track your tasks, and get things done!</p>
-                        <a href="#tasks" className="px-6 py-3 bg-blue-700 rounded-lg text-lg hover:bg-blue-800 transition duration-300">Start Managing Tasks</a>
+                <section className="relative bg-blue-500 text-white py-32 px-6 lg:px-24">
+                    {/* Overlay Effect */}
+                    <div className="absolute inset-0 bg-black opacity-50"></div>
+
+                    {/* Background Image */}
+                    <div
+                        className="absolute inset-0 bg-cover bg-center z-0"
+                        style={{
+                            backgroundImage: 'url(todo-frontend/src/assests/dlxmedia-hu-l7idyRTQePY-unsplash.jpg)',
+                        }}
+                    ></div>
+
+                    {/* Hero Content */}
+                    <div className="relative z-10 text-center text-white">
+                        {/* Main Heading */}
+                        <h1 className="text-2xl md:text-6xl font-bold mb-6 leading-tight tracking-wide">
+                            Welcome to Your Todo Dashboard
+                        </h1>
+
+                        {/* Subheading */}
+                        <p className="text-lg md:text-2xl mb-8 max-w-2xl mx-auto">
+                            Stay organized, track your tasks, and get things done—Effortlessly manage your work and life.
+                        </p>
+
+                        {/* Call-to-Action Button */}
+                        <a
+                            href="#tasks"
+                            className="inline-block px-8 py-4 bg-blue-700 text-lg font-semibold text-white rounded-lg shadow-xl hover:bg-blue-800 hover:scale-105 transform transition duration-300 ease-in-out"
+                        >
+                            Start Managing Tasks
+                        </a>
                     </div>
+
+                    
                 </section>
 
                 {/* Summary Section */}
