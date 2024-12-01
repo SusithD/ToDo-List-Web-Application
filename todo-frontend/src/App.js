@@ -1,13 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import { getTodos, addTodo, updateTodo, deleteTodo } from './api/todoApi';
+import SignupPage from './pages/SignupPage';
+import LoginPage from './pages/LoginPage';
+import { AuthContext, AuthProvider } from './context/AuthContext';
 
 const App = () => {
-    const [todos, setTodos] = useState([]);
+    return (
+        <AuthProvider>
+            <Router>
+                <Routes>
+                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/todos" element={<ProtectedTodoApp />} />
+                    <Route path="*" element={<Navigate to="/login" replace />} />
+                </Routes>
+            </Router>
+        </AuthProvider>
+    );
+};
 
-    useEffect(() => {
+// Protected Todo App
+const ProtectedTodoApp = () => {
+    const { token } = useContext(AuthContext);
+
+    return token ? <TodoApp /> : <Navigate to="/signup" replace />;
+};
+
+// Todo Application Component
+const TodoApp = () => {
+    const [todos, setTodos] = React.useState([]);
+
+    React.useEffect(() => {
         const fetchTodos = async () => {
             const data = await getTodos();
             setTodos(data);
