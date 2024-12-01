@@ -21,6 +21,15 @@ const todoSchema = new mongoose.Schema({
     dueDate: {
         type: Date,
     },
+    category: {
+        type: String, // e.g., 'work', 'personal', etc.
+    },
+    estimatedTime: {
+        type: Number, // in hours (decimal if necessary)
+    },
+    attachment: {
+        type: String, // URL to the attachment if any
+    },
 });
 
 module.exports = mongoose.model('Todo', todoSchema);

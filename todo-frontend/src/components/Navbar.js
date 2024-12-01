@@ -10,7 +10,7 @@ const Navbar = () => {
             <div className="container mx-auto px-4 py-2 flex items-center justify-between">
                 {/* Branding */}
                 <div className="flex items-center space-x-4">
-                    <div className="text-2xl font-bold">📝 My Todo App</div>
+                    <div className="text-xl font-bold">My Todo App</div>
                 </div>
 
                 {/* Search Bar */}

@@ -55,6 +55,17 @@ const TodoDashboard = () => {
             {/* Main Content */}
             <div className="flex-1 overflow-y-auto">
                 <Navbar />
+
+                {/* Hero Section */}
+                <section className="relative bg-blue-500 text-white py-20">
+                    <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(https://unsplash.com/photos/a-laptop-and-a-charger-l7idyRTQePY)' }}></div>
+                    <div className="relative z-10 text-center">
+                        <h1 className="text-4xl font-bold mb-4">Welcome to Your Todo Dashboard</h1>
+                        <p className="text-xl mb-6">Stay organized, track your tasks, and get things done!</p>
+                        <a href="#tasks" className="px-6 py-3 bg-blue-700 rounded-lg text-lg hover:bg-blue-800 transition duration-300">Start Managing Tasks</a>
+                    </div>
+                </section>
+
                 {/* Summary Section */}
                 <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="p-4 bg-white shadow-md rounded-lg text-center">
@@ -70,6 +81,7 @@ const TodoDashboard = () => {
                         <p className="text-2xl font-bold">{inProgressTasks}</p>
                     </div>
                 </div>
+
                 {/* Task Management Section */}
                 <div className="p-6">
                     <TodoForm onAdd={handleAdd} />
