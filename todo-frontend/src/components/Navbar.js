@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
-    const { user, logout } = useContext(AuthContext); // Assuming `user` is available in the context
+    const { user, logout } = useContext(AuthContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const [notifications, setNotifications] = useState([
     ]);
@@ -19,11 +19,6 @@ const Navbar = () => {
     return (
         <nav className="bg-gray-800 shadow-md text-white">
             <div className="container mx-auto px-4 py-2 flex items-center justify-between">
-                {/* Branding */}
-                <div className="flex items-center space-x-4">
-                    <div className="text-xl font-bold">My Todo App</div>
-                </div>
-
                 {/* Search Bar */}
                 <div className="hidden md:flex flex-1 mx-4">
                     <input
@@ -69,7 +64,7 @@ const Navbar = () => {
                         className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                         <img
-                            src="https://via.placeholder.com/40" // Replace with user's profile picture URL
+                            src="https://via.placeholder.com/40"
                             alt="Profile"
                             className="w-10 h-10 rounded-full border-2 border-white"
                         />
@@ -92,7 +87,7 @@ const Navbar = () => {
                         <div className="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg">
                             <button
                                 className="block w-full text-left px-4 py-2 hover:bg-gray-200"
-                                onClick={() => alert('Profile clicked')} // Replace with actual profile navigation
+                                onClick={() => alert('Profile clicked')}
                             >
                                 Profile
                             </button>
