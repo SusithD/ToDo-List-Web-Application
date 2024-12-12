@@ -8,7 +8,7 @@ import { getTodos, addTodo, updateTodo, deleteTodo } from '../api/todoApi';
 
 const TodoDashboard = () => {
     const [todos, setTodos] = useState([]);
-    const [filter, setFilter] = useState('all'); // Filter: 'all', 'completed', 'in-progress'
+    const [filter, setFilter] = useState('all'); 
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(true);
 
@@ -24,7 +24,6 @@ const TodoDashboard = () => {
 
     // Check for upcoming tasks (within 24 hours) and trigger notifications
     useEffect(() => {
-        // Request notification permission if not granted yet
         if (Notification.permission !== "granted") {
             Notification.requestPermission();
         }
@@ -35,8 +34,8 @@ const TodoDashboard = () => {
             const upcomingTasks = todos.filter((todo) => {
                 const dueDate = new Date(todo.dueDate);
                 const timeDifference = dueDate - currentDate;
-                const oneDayInMs = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-                return timeDifference <= oneDayInMs && timeDifference > 0; // Due within the next 24 hours
+                const oneDayInMs = 24 * 60 * 60 * 1000;
+                return timeDifference <= oneDayInMs && timeDifference > 0;
             });
 
             if (upcomingTasks.length > 0) {
@@ -51,7 +50,7 @@ const TodoDashboard = () => {
             if (Notification.permission === "granted") {
                 new Notification(`Task Due Soon: ${task.title}`, {
                     body: `Due on ${new Date(task.dueDate).toLocaleString()}`,
-                    icon: '/path/to/icon.png', // Optional: Add an icon for the notification
+                    icon: '/path/to/icon.png',
                 });
             }
         };
@@ -59,7 +58,7 @@ const TodoDashboard = () => {
         // Set an interval to check for upcoming tasks every minute
         const interval = setInterval(() => {
             checkForUpcomingTasks();
-        }, 60000); // Check every 60 seconds
+        }, 60000);
 
         // Cleanup the interval when the component is unmounted
         return () => clearInterval(interval);
