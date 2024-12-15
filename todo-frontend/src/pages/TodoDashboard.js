@@ -45,7 +45,6 @@ const TodoDashboard = () => {
             }
         };
 
-        // Function to send a notification
         const sendNotification = (task) => {
             if (Notification.permission === "granted") {
                 new Notification(`Task Due Soon: ${task.title}`, {
@@ -55,7 +54,6 @@ const TodoDashboard = () => {
             }
         };
 
-        // Set an interval to check for upcoming tasks every minute
         const interval = setInterval(() => {
             checkForUpcomingTasks();
         }, 60000);
