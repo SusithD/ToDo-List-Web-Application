@@ -26,21 +26,25 @@ const LoginForm = () => {
     };
 
     return (
-        <div >
-            <div className="w-full max-w-lg p-8 bg-gray-800 text-white shadow-xl rounded-lg">
+        <div>
+            <div className="w-full max-w-lg p-8 bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-2xl rounded-lg">
                 {/* Error Message */}
-                {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+                {error && (
+                    <p className="text-red-500 text-sm text-center mb-4 animate-pulse">
+                        {error}
+                    </p>
+                )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Email Input */}
                     <div>
                         <input
                             type="email"
-                            placeholder="Email"
+                            placeholder="Email Address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="w-full p-4 bg-gray-700 text-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-4 bg-gray-800 text-white border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-purple-500"
                         />
                     </div>
 
@@ -52,14 +56,14 @@ const LoginForm = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="w-full p-4 bg-gray-700 text-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-4 bg-gray-800 text-white border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-purple-500"
                         />
                     </div>
 
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full p-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg shadow-md hover:from-purple-600 hover:to-pink-600 transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-400"
                     >
                         Login
                     </button>
@@ -67,7 +71,10 @@ const LoginForm = () => {
 
                 {/* Forgot Password Link */}
                 <div className="mt-4 text-center">
-                    <a href="/forgot-password" className="text-sm text-blue-500 hover:text-blue-700">
+                    <a
+                        href="/forgot-password"
+                        className="text-sm text-purple-400 hover:text-purple-600 transition-all duration-200"
+                    >
                         Forgot password?
                     </a>
                 </div>
