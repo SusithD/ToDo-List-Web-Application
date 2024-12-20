@@ -7,9 +7,9 @@ const CalendarView = ({ todos }) => {
 
   // Filter todos based on the selected date
   const getTodosForSelectedDate = (selectedDate) => {
-    const formattedDate = selectedDate.toISOString().split('T')[0]; // Format date to YYYY-MM-DD
+    const formattedDate = selectedDate.toISOString().split('T')[0]; 
     return todos.filter((todo) => {
-      return todo.dueDate?.split('T')[0] === formattedDate; // Compare dates
+      return todo.dueDate?.split('T')[0] === formattedDate; 
     });
   };
 
